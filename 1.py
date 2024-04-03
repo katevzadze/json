@@ -8,8 +8,8 @@ with open("sales.json", "r", encoding="utf-8") as file:
 def profit(client_data):
     total_profit = {}
     for sale in client_data["sales"]:
-        category = sale["category"]
-        profit = sale["price"] * sale["quantity"]
+        category = sale.get("category")
+        profit = sale.get("total_price") * sale.get("quantity")
         if category not in total_profit:
             total_profit[category] = profit
         else:
@@ -19,4 +19,4 @@ def profit(client_data):
 
 shop_sales = profit(data)
 for category in shop_sales:
-    print(f"Категория: {category}, выручка: {shop_sales[category]}")
+    print(f"Выручка по категории {category}: {shop_sales[category]} руб.")
