@@ -8,12 +8,11 @@ with open("inventory.json", "r", encoding="utf-8") as file:
 def need_to_buy(inventory):
     need_to_buy = {}
     for name in inventory["inventory"]:
-        if name["quantity"] < name["min_quantity"]:
-            need_to_buy = (
-                f"Необходимо закупить: {name['item']} {name['quantity']} шт.")
+        if name["quantity"] < name["minimum_quantity"]:
+            need_to_buy[name["item"]] = name["quantity"] 
     return need_to_buy
 
 
 inventory_need_to_buy = need_to_buy(inventory)
-for item in inventory_need_to_buy:
-    print(item)
+for item, quantify in inventory_need_to_buy.items():
+    print(f"Необходимо закупить: {item} {quantify} шт.")
